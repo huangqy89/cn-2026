@@ -1,0 +1,17 @@
+instructors:
+  - name: Qianyi Huang
+    profile_pic: /_images/pp/huangqianyi.jpg
+    webpage: https://huangqy89.github.io
+
+teaching_assistants:
+  - name: Yihang Zhang
+    profile_pic: /_images/pp/yihang.jpg
+    # webpage: https://github.com/ourfor
+  
+  - name: Yutong Xu
+    profile_pic: /_images/pp/yutong.jpg
+    # webpage: https://github.com/ourfor
+
+  - name: Junlin Lv
+    profile_pic: /_images/pp/junlin.jpg
+    # webpage: https://en.wikipedia.org/wiki/Hermione_Granger

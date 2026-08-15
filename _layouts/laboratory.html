@@ -1,0 +1,171 @@
+---
+layout: default
+title: page.title
+---
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">Released on {{ page.date | date: "%A" }} {{ page.date | date: site.dateformat }}</p>
+  </header>
+
+  <div>
+    {% if page.due_event %}
+    <span style="font-weight: bold">Due Date: {{ page.due | date: site.dateformat }} {{ page.due_event.date | date: "%H:%M" }}</span>
+    {% endif %}
+    <p style="font-weight: bold">Download
+      {% if page.pdf %}
+      [<a href="{{ page.pdf | prepend: site.baseurl }}">problems</a>]
+      {% endif %}
+      {% if page.attachment %}
+      [<a href="{{ page.attachment | prepend: site.baseurl }}">attachment</a>]
+      {% endif %}
+      {% if page.solutions %}
+      [<a href="{{ page.solutions | prepend: site.baseurl }}">solutions</a>]
+      {% endif %}
+
+      {% for link in page.links %}
+      [<a href="{{ link.url }}">{{ link.name }}</a>]
+      {% endfor %}
+    </p>
+
+    <div style="color: gray;">
+      <h3>Late Policy</h3>
+      {% include late_policy.html %}
+    </div>
+  </div>
+
+  <br />
+  <article class="post-content">
+    {{ content }}
+  </article>
+
+  {% if page.score_file %}
+  <p style="font-weight: bold">Score</p>
+  <div style="color: gray;">
+    <h3>Enter your student ID to check your grades</h3>
+  </div>
+  <div>
+  <span>
+    <input placeholder="student id" type="text" style="font-size: medium;" />
+    <button id="check-btn" style="font-size: medium;">submit</button>
+  </span>
+  <div id="score-detail" style="margin: 1rem;font-size:medium" />
+  <!-- <input type="file" placeholder="score file" id="file-input" style="font-size: medium;" /> -->
+  <!-- <button id="encrypt-btn" style="font-size: medium;">Encrypt and Download</button> -->
+  </div>
+
+
+  <script>
+    function getKey(secret) {
+      const enc = new TextEncoder();
+      const rawKey = enc.encode(secret);
+      return crypto.subtle.digest('SHA-256', rawKey).then(hash => {
+        return crypto.subtle.importKey(
+          'raw',
+          hash,
+          { name: 'AES-GCM' },
+          false,
+          ['decrypt', 'encrypt']
+        )
+      });
+    }
+
+    function decryptData(encryptedData, key, iv) {
+      return crypto.subtle.decrypt(
+        {
+          name: 'AES-GCM',
+          iv: iv
+        },
+        key,
+        encryptedData
+      );
+    }
+
+    function encryptData(data, key, iv) {
+      return crypto.subtle.encrypt(
+        {
+          name: 'AES-GCM',
+          iv: iv
+        },
+        key,
+        data
+      );
+    }
+
+    document.querySelector("#check-btn")
+      .onclick = () => {
+        const studentId = document.querySelector("input").value;
+        fetch("{{ page.score_file | prepend: site.baseurl }}")
+          .then(response => response.arrayBuffer())
+          .then(encryptedData => {
+            encryptedData = new Uint8Array(encryptedData);
+            return getKey('cn-2026').then(key => {
+              const iv = encryptedData.subarray(0, 12);
+              encryptedData = encryptedData.subarray(12);
+              return decryptData(encryptedData, key, iv);
+            });
+          })
+          .then(data => {
+            const res = JSON.parse(new TextDecoder().decode(data))
+            const scoreDetail = document.querySelector("#score-detail");
+            const table = document.createElement("table");
+            table.className = "score"
+            const thead = document.createElement("thead");
+            const tbody = document.createElement("tbody");
+            const rows = res.filter(item => item["学号"] === studentId );
+            scoreDetail.innerHTML = "";
+            rows.map(row => {
+              const tr = document.createElement("tr");
+              for (const key in row) {
+                const td = document.createElement("td");
+                td.innerHTML = row[key];
+                tr.appendChild(td);
+                const th = document.createElement("th");
+                th.innerHTML = key;
+                thead.appendChild(th);
+              }
+              tbody.appendChild(tr);
+            })
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            scoreDetail.appendChild(table);
+          });
+      };
+
+      /*
+      document.querySelector("#encrypt-btn").onclick = function() {
+        const fileInput = document.querySelector("#file-input");
+        const file = fileInput.files[0];
+        if (!file) {
+          alert("Please select a file first.");
+          return;
+        }
+  
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const fileContent = event.target.result;
+          getKey('cn-2026').then(key => {
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            encryptData(fileContent, key, iv).then(encryptedData => {
+              console.log(new Uint8Array(encryptedData));
+              const blob = new Blob([iv, new Uint8Array(encryptedData)], { type: 'application/octet-stream' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = file.name + '.encrypted';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            });
+          });
+        };
+        reader.readAsArrayBuffer(file);
+      };
+      */
+  </script>
+
+  {% endif %}
+
+</div>
