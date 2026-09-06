@@ -4,13 +4,6 @@ title: Materials
 permalink: /materials/
 ---
 
-{% include image.html url="/_images/cn_8th.jpg" width=175 align="right" %}
-
-## TextBook
-
-[Computer Networking: A Top-Down Approach, Global Edition, 8th Edition](https://github.com/TimorYang/Computer-Networking-Keith-Ross/blob/main/book/Computer%20Networking_%20A%20Top-Down%20Approach%2C%20Global%20Edition%2C%208th%20Edition.pdf?raw=true)
-
-
 ## Additional Course Materials
 
 [Course website by Jim Kurose](https://gaia.cs.umass.edu/kurose_ross/index.php).

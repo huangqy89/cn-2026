@@ -52,7 +52,7 @@ layout: default
                 <h2>Teaching Assistants</h2>
                 {% for ta in site.data.people.teaching_assistants %}
                 <div class="image--cover-container">
-                    <img src="{{ta.profile_pic | prepend: site.baseurl }}" class="image--cover">
+                    <img src="{{ta.profile_pic | prepend: site.baseurl }}" class="image--cover{% if ta.crop_profile_pic %} image--cover-cropped{% endif %}{% if ta.white_profile_pic_background %} image--cover-white-background{% endif %}">
                     {% if ta.webpage %}
                     <p><a href="{{ ta.webpage }}">{{ta.name}}</a></p>
                     {% else %}

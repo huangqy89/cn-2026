@@ -422,6 +422,14 @@ a.tosu {
     background: linear-gradient(#7cb7c7, #bcf1ffe0);
 }
 
+.image--cover-cropped {
+    object-fit: cover;
+}
+
+.image--cover-white-background {
+    background: #fff;
+}
+
 .announcement-box {
     padding: 15px;
     margin-bottom: 20px;

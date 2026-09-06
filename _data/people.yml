@@ -4,14 +4,21 @@ instructors:
     webpage: https://huangqy89.github.io
 
 teaching_assistants:
-  - name: Yihang Zhang
-    profile_pic: /_images/pp/yihang.jpg
+  - name: Zixian Que (Lecture)
+    profile_pic: /_images/pp/zixian.jpg
+    white_profile_pic_background: true
     # webpage: https://github.com/ourfor
   
-  - name: Yutong Xu
-    profile_pic: /_images/pp/yutong.jpg
+  - name: Ling Wang (Lecture)
+    profile_pic: /_images/pp/lingw.jpg
+    white_profile_pic_background: true
     # webpage: https://github.com/ourfor
 
-  - name: Junlin Lv
-    profile_pic: /_images/pp/junlin.jpg
+  - name: Liming Peng (Lab)
+    profile_pic: /_images/pp/peng.jpg
+    crop_profile_pic: true
+    # webpage: https://en.wikipedia.org/wiki/Hermione_Granger
+    
+  - name: Xin Mo (Lab)
+    profile_pic: /_images/pp/xin.jpg
     # webpage: https://en.wikipedia.org/wiki/Hermione_Granger
