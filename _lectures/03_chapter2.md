@@ -1,6 +1,6 @@
 ---
 type: lecture
-date: 2025-09-16
+date: 2026-09-16
 title: Chapter 2
 tldr: "Application Layer."
 thumbnail: /static_files/lectures/application.png
