@@ -9,8 +9,6 @@ links:
       name: word
     - url: /static_files/laboratory/http/Wireshark_HTTP_trace.zip
       name: traces
-    - url: https://web.ugreen.cloud/web/#/file/1931962f365f4943857c1b4be9970e5a
-      name: submission link
-    #- url: /static_files/laboratory/http/wiresharp&http_solution.pdf
-    #  name: solution
+    - url: /static_files/laboratory/http/Solution.pdf
+      name: solution
 ---
