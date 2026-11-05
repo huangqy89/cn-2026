@@ -14,6 +14,6 @@ links:
       name: group template
     - url: /static_files/laboratory/static_routing/成员实验心得体会模板.docx
       name: personal template
-    - url: https://web.ugreen.cloud/web/#/file/e11a328c6ecf4b87a3cf0fd10bd0c120
+    - url: https://web.ugreen.cloud/web/#/file/5984712dfe754d37823fee2301d8fa7a
       name: submission site
 ---
