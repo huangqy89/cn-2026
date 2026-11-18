@@ -6,10 +6,12 @@ tldr: "ACL"
 thumbnail: /static_files/laboratory/acl/acl.jpg
 #score_file: /static_files/assignments/acl-score.json.encrypted
 links: 
-    - url: /static_files/laboratory/acl/访问控制列表的配置.pptx
+    - url: /static_files/laboratory/acl/访问控制列表的配置-Update.pptx
       name: slides
     - url: /static_files/laboratory/acl/控制访问列表实验指导手册.docx
       name: manual
     - url: https://web.ugreen.cloud/web/#/file/89fa8983efd44c8699c8b26c350bf6fd
-      name: submission site
+      name: submission site1
+    - url: https://web.ugreen.cloud/web/#/file/8733649656164fbfa444c74c96616597
+      name: submission site2
 ---
